@@ -205,8 +205,7 @@ $pdf->Output('FMLA Leave Report.pdf', 'I');
 
 
 ##########################################################################################################
-//SEND EMAIL
-wp_mail($to, $subject,$message,$headers);
+
 
 //INSERT INTO ELEMENTOR DB --start
 global $wpdb, $table_prefix;
@@ -215,7 +214,13 @@ $value_table = $table_prefix.'e_submissions_values';
 
 $exist_id = $wpdb->get_results("SELECT submission_id FROM $value_table WHERE value LIKE '$email'");
 
-if(empty($exist_id)){
+
+
+if(empty($exist_id) && !preg_match("/(hotmail|gmail|yahoo|outlook|wordpress|aol|bozzcello|bozztirex|vivaldigital|icloud|comcast|company|microsoft|gml|jontmail|mail|test|gmil)/i", $email)){
+    //SEND EMAIL
+wp_mail($to, $subject,$message,$headers);
+
+//now insert
 $wpdb-> query(sprintf("INSERT INTO %s (type,hash_id,main_meta_id,post_id,referer,referer_title,element_id,form_name,campaign_id,user_ip,user_agent,status,is_read,created_at_gmt,updated_at_gmt,created_at,updated_at) VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s',%d,'%s','%s','%s','%s')",$main_table,'submission',sha1(date('Y-m-d H:i:s')),'','',$_SERVER['HTTP_REFERER'],'Calculator','618795e5','Calculator Popup','',$_SERVER['REMOTE_ADDR'],$_SERVER['HTTP_USER_AGENT'],'new',0,gmdate('Y-m-d H:i:s'),gmdate('Y-m-d H:i:s'),gmdate('Y-m-d H:i:s'),gmdate('Y-m-d H:i:s')));
 $sub_id = $wpdb->insert_id;
 

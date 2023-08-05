@@ -5,8 +5,8 @@
  * 
  * Plugin name: FMLA Calculator by Heigh10
  * Plugin URI: #
- * Author: Deepak Kumar
- * Author URI: https://www.linkedin.com/in/deepak01
+ * Author: Heigh10
+ * Author URI: https://heigh10.com/
  * Description: A Simple JavaScript & JQuery Based lightweight plugin to calculate Family and Medical Leave Act Hours. To use this plugin in front-end use shortcode <code>[fmla_calculator]</code>. Please note that this plugin will only work <b>/fmla-calculator/</b> page.
  */
 
